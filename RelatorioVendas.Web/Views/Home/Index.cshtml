@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Home Page - Vendas";
+}
+
+<div class="d-flex flex-column justify-content-center" style="height: 80vh">
+    <a href="@Url.Action("AnalysisBySeller", "Analysis")" class="btn btn-success btn-lg p-3 mb-3">Gerar relatório de vendas</a>
+
+    <a href="@Url.Action("Register", "SellerRegister")" class="btn btn btn-success btn-lg p-3 mb-3">Cadastrar novo vendedor</a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1-pV09988ZCsoJamDv7_fdWYcBGR8iAiC3bTLYXqqZtg/edit?pli=1#gid=0" target="_blank" class ="btn btn-success btn-lg p-3">Visualizar planilha</a>
+</div>

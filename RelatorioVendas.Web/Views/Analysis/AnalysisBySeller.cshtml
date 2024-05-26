@@ -1,0 +1,73 @@
+﻿@{
+    var sellersBySales = ViewBag.SellerSales as List<(string, string, decimal, decimal)> ?? new List<(string, string, decimal, decimal)>();
+    ViewData["Title"] = "Relatório de Vendas";
+}
+
+
+<form asp-controller="Analysis" asp-action="AnalysisBySeller" class="text-center">
+    <div class="form-group row justify-content-center" mb-3>
+        <label for="year">Ano</label>
+        <input type="text" class="form-control mb-2" name="year" placeholder="Insira o ano" required>
+    </div>
+    <div class="form-group row justify-content-center" mb-3>
+        <label for="month" >Mês</label>
+        <select name="month" class="form-control mb-3" required>
+            <option selected value="">Selecione o mês</option>
+            <option value="Jan">Janeiro</option>
+            <option value="Fev">Fevereiro</option>
+            <option value="Mar">Março</option>
+            <option value="Abr">Abril</option>
+            <option value="Mai">Maio</option>
+            <option value="Jun">Junho</option>
+            <option value="Jul">Julho</option>
+            <option value="Ago">Agosto</option>
+            <option value="Set">Setembro</option>
+            <option value="Out">Outubro</option>
+            <option value="Nov">Novembro</option>
+            <option value="Dez">Dezembro</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success mb-3">Buscar relatório</button>
+</form>
+    
+
+
+    @if (sellersBySales.Any())
+    {
+        <h2>Ranking de desempenho relativo a média de vendas estadual - @ViewBag.Month de @ViewBag.Year</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Ranking de vendedores </th>
+                    <th scope="col">Vendedores</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Total de vendas</th>
+                    <th scope="col">Média de vendas do estado</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var tupla in sellersBySales)
+                {
+                    <tr>
+                        <td scope="row">@(sellersBySales.IndexOf(@tupla) + 1)</td>
+                        <td scope="row">@tupla.Item1</td>
+                        <td scope="row">@tupla.Item2</td>
+                        <td scope="row">R$ @tupla.Item3</td>
+                        <td scope="row">R$ @tupla.Item4</td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center">
+            <p>Não há dados para exibir.</p>
+        </div>
+         
+    }
+
+
